@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finanzas — Gestor Personal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="chart.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="hamburger" id="hamburger" aria-label="Menú">☰</button>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-dot"></span>
+      Finanzas
+    </div>
+    <div class="nav-label">Principal</div>
+    <div class="nav-item active" data-page="dashboard"><span class="nav-icon">◈</span> Dashboard</div>
+    <div class="nav-item" data-page="movimientos"><span class="nav-icon">⇅</span> Movimientos</div>
+    <div class="nav-item" data-page="estadisticas"><span class="nav-icon">◎</span> Estadísticas</div>
+    <div class="nav-item" data-page="presupuestos"><span class="nav-icon">◷</span> Presupuestos</div>
+    <div class="sidebar-footer">
+      <button class="btn-add-main" id="btn-open-modal">+ Nuevo movimiento</button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <section class="page active" id="page-dashboard">
+      <div class="page-header">
+        <div class="page-title" id="dash-title">Cargando...</div>
+        <div class="page-subtitle">Resumen financiero del mes actual</div>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-label">💰 Saldo total</div>
+          <div class="card-value blue" id="saldo-total">$0</div>
+          <div class="card-sub">Balance acumulado</div>
+        </div>
+        <div class="card">
+          <div class="card-label">📈 Ingresos del mes</div>
+          <div class="card-value green" id="ingresos-mes">$0</div>
+          <div class="card-sub">Este mes</div>
+        </div>
+        <div class="card">
+          <div class="card-label">📉 Gastos del mes</div>
+          <div class="card-value red" id="gastos-mes">$0</div>
+          <div class="card-sub">Este mes</div>
+        </div>
+        <div class="card">
+          <div class="card-label">🏦 Ahorro del mes</div>
+          <div class="card-value" id="ahorro-mes">$0</div>
+          <div class="card-sub" id="ahorro-sub">Ingresos − Gastos</div>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="box">
+          <div class="box-header">
+            <span class="box-title">Últimos movimientos</span>
+            <span class="nav-link" data-page="movimientos" style="font-size:12px;color:var(--muted);cursor:pointer;">Ver todos →</span>
+          </div>
+          <div class="box-body" id="lista-reciente"></div>
+        </div>
+        <div class="box">
+          <div class="box-header"><span class="box-title">Gastos por categoría</span></div>
+          <div class="box-body" id="lista-categorias"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-movimientos">
+      <div class="page-header">
+        <div class="page-title">Movimientos</div>
+        <div class="page-subtitle">Historial completo de ingresos y gastos</div>
+      </div>
+      <div class="filters">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" id="search-input" placeholder="Buscar movimiento...">
+        </div>
+        <select class="filter-select" id="filter-type">
+          <option value="todos">Todos</option>
+          <option value="ingreso">Ingresos</option>
+          <option value="gasto">Gastos</option>
+        </select>
+        <select class="filter-select" id="filter-mes"></select>
+        <select class="filter-select" id="filter-cat"></select>
+      </div>
+      <div class="box">
+        <div class="box-body" id="lista-movimientos"></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-estadisticas">
+      <div class="page-header">
+        <div class="page-title">Estadísticas</div>
+        <div class="page-subtitle">Evolución y análisis de tus finanzas</div>
+      </div>
+      <div class="two-col">
+        <div class="box">
+          <div class="box-header"><span class="box-title">Gastos últimos 6 meses</span></div>
+          <div class="chart-container">
+            <canvas id="chart-gastos"></canvas>
+          </div>
+        </div>
+        <div class="box">
+          <div class="box-header"><span class="box-title">Insights del mes</span></div>
+          <div class="box-body" id="insights" style="padding:16px 22px;"></div>
+        </div>
+      </div>
+      <div class="box" style="margin-top:20px;">
+        <div class="box-header"><span class="box-title">Desglose por categorías (mes actual)</span></div>
+        <div class="box-body" id="stats-categorias"></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-presupuestos">
+      <div class="page-header">
+        <div class="page-title">Presupuestos</div>
+        <div class="page-subtitle">Límites de gasto mensual por categoría</div>
+      </div>
+      <div class="two-col">
+        <div class="box">
+          <div class="box-header"><span class="box-title">Mis presupuestos</span></div>
+          <div class="box-body" id="lista-presupuestos"></div>
+        </div>
+        <div class="box">
+          <div class="box-header"><span class="box-title">Agregar presupuesto</span></div>
+          <div style="padding:22px;">
+            <div class="form-group">
+              <label class="form-label">Categoría</label>
+              <select class="form-input" id="budget-cat"></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Límite mensual ($)</label>
+              <input type="number" class="form-input" id="budget-monto" placeholder="Ej: 15000" min="0">
+            </div>
+            <button class="btn-submit" id="btn-guardar-budget">Guardar presupuesto</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-title">
+      Nuevo movimiento
+      <button class="modal-close" id="btn-close-modal">✕</button>
+    </div>
+    <div class="type-toggle">
+      <button class="type-btn active-expense" id="btn-gasto">📉 Gasto</button>
+      <button class="type-btn" id="btn-ingreso">📈 Ingreso</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Descripción</label>
+      <input type="text" class="form-input" id="tx-desc" placeholder="Ej: Almuerzo, Sueldo...">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Monto ($)</label>
+        <input type="number" class="form-input" id="tx-monto" placeholder="0.00" min="0" step="0.01">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Fecha</label>
+        <input type="date" class="form-input" id="tx-fecha">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Categoría</label>
+      <select class="form-input" id="tx-cat"></select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Método de pago</label>
+      <select class="form-input" id="tx-metodo">
+        <option value="Efectivo">💵 Efectivo</option>
+        <option value="Débito">💳 Débito</option>
+        <option value="Crédito">🏦 Crédito</option>
+        <option value="Transferencia">📲 Transferencia</option>
+        <option value="Mercado Pago">📱 Mercado Pago</option>
+      </select>
+    </div>
+    <button class="btn-submit" id="btn-guardar-tx">Guardar movimiento</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="main.js"></script>
+</body>
+</html>

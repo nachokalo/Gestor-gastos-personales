@@ -1,0 +1,33 @@
+{
+  "gasto": [
+    { "nombre": "Comida",        "icon": "🍔", "color": "#f59e0b" },
+    { "nombre": "Supermercado",  "icon": "🛒", "color": "#10b981" },
+    { "nombre": "Delivery",      "icon": "🛵", "color": "#f97316" },
+    { "nombre": "Transporte",    "icon": "🚇", "color": "#3b82f6" },
+    { "nombre": "Combustible",   "icon": "⛽", "color": "#6366f1" },
+    { "nombre": "Alquiler",      "icon": "🏠", "color": "#8b5cf6" },
+    { "nombre": "Servicios",     "icon": "💡", "color": "#eab308" },
+    { "nombre": "Internet",      "icon": "📡", "color": "#06b6d4" },
+    { "nombre": "Celular",       "icon": "📱", "color": "#84cc16" },
+    { "nombre": "Streaming",     "icon": "🎬", "color": "#ec4899" },
+    { "nombre": "Salud",         "icon": "🏥", "color": "#14b8a6" },
+    { "nombre": "Gimnasio",      "icon": "🏋️", "color": "#f43f5e" },
+    { "nombre": "Educación",     "icon": "📚", "color": "#a78bfa" },
+    { "nombre": "Ropa",          "icon": "👕", "color": "#fb923c" },
+    { "nombre": "Salidas",       "icon": "🎉", "color": "#e879f9" },
+    { "nombre": "Café",          "icon": "☕", "color": "#92400e" },
+    { "nombre": "Mascotas",      "icon": "🐾", "color": "#78716c" },
+    { "nombre": "Tecnología",    "icon": "💻", "color": "#0ea5e9" },
+    { "nombre": "Viajes",        "icon": "✈️", "color": "#10b981" },
+    { "nombre": "Suscripciones", "icon": "🔄", "color": "#7c3aed" },
+    { "nombre": "Otros",         "icon": "📦", "color": "#6b7280" }
+  ],
+  "ingreso": [
+    { "nombre": "Sueldo",    "icon": "💼", "color": "#22c55e" },
+    { "nombre": "Freelance", "icon": "💻", "color": "#10b981" },
+    { "nombre": "Inversión", "icon": "📈", "color": "#3b82f6" },
+    { "nombre": "Regalo",    "icon": "🎁", "color": "#f59e0b" },
+    { "nombre": "Reembolso", "icon": "↩️", "color": "#06b6d4" },
+    { "nombre": "Otros",     "icon": "💰", "color": "#6b7280" }
+  ]
+}
